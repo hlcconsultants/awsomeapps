@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FastGet.App/FastGet.App.csproj" />
+    <Project Path="src/FastGet.Core/FastGet.Core.csproj" />
+    <Project Path="src/FastGet.Host/FastGet.Host.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FastGet.Tests/FastGet.Tests.csproj" />
+  </Folder>
+</Solution>

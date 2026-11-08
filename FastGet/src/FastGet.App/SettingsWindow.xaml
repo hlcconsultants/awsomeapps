@@ -1,0 +1,64 @@
+<Window x:Class="FastGet.App.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Settings" Width="520" SizeToContent="Height" ResizeMode="NoResize"
+        Icon="app.ico" Style="{StaticResource Base}" WindowStartupLocation="CenterOwner">
+    <StackPanel Margin="18">
+        <TextBlock Style="{StaticResource Label}" Margin="0,0,0,4" Text="Download folder"/>
+        <DockPanel>
+            <Button DockPanel.Dock="Right" Style="{StaticResource Tool}" Content="Browse…" Click="Browse_Click"/>
+            <TextBox x:Name="DirBox" Style="{StaticResource Field}"/>
+        </DockPanel>
+        <CheckBox x:Name="CategoriesBox" Margin="0,8,0,0" Content="Sort downloads into folders by file type"/>
+
+        <Grid Margin="0,4,0,0">
+            <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+            <StackPanel Margin="0,0,10,0">
+                <TextBlock Style="{StaticResource Label}" Text="Simultaneous downloads"/>
+                <TextBox x:Name="ConcurrentBox" Style="{StaticResource Field}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="0,0,10,0">
+                <TextBlock Style="{StaticResource Label}" Text="Connections each"/>
+                <TextBox x:Name="ConnectionsBox" Style="{StaticResource Field}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <TextBlock Style="{StaticResource Label}" Text="Speed limit KB/s (0 = off)"/>
+                <TextBox x:Name="LimitBox" Style="{StaticResource Field}"/>
+            </StackPanel>
+        </Grid>
+
+        <CheckBox x:Name="ScheduleBox" Margin="0,16,0,0" Content="Only run the queue during these hours" FontWeight="SemiBold"/>
+        <Grid>
+            <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+            <StackPanel Margin="0,0,10,0">
+                <TextBlock Style="{StaticResource Label}" Text="Start (HH:mm)"/>
+                <TextBox x:Name="StartBox" Style="{StaticResource Field}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock Style="{StaticResource Label}" Text="Stop (HH:mm)"/>
+                <TextBox x:Name="StopBox" Style="{StaticResource Field}"/>
+            </StackPanel>
+        </Grid>
+        <CheckBox x:Name="StopEnabledBox" Margin="0,8,0,0" Content="Stop downloads at the stop time"/>
+
+        <TextBlock Style="{StaticResource Label}" Text="When all downloads finish"/>
+        <ComboBox x:Name="AfterBox" Width="160" HorizontalAlignment="Left"/>
+
+        <CheckBox x:Name="ConfirmBox" Margin="0,16,0,0" Content="Ask before starting downloads from the browser"/>
+        <CheckBox x:Name="ClipboardBox" Margin="0,6,0,0" Content="Offer to download links I copy"/>
+        <CheckBox x:Name="TrayBox" Margin="0,6,0,0" Content="Keep running in the tray when closed"/>
+        <CheckBox x:Name="AutoStartBox" Margin="0,6,0,0" Content="Start with Windows"/>
+
+        <DockPanel Margin="0,14,0,0">
+            <Button x:Name="FfmpegButton" DockPanel.Dock="Right" Style="{StaticResource Tool}" Content="Install ffmpeg" Click="InstallFfmpeg_Click"/>
+            <TextBlock x:Name="FfmpegText" VerticalAlignment="Center" Foreground="{StaticResource Muted}" TextWrapping="Wrap"/>
+        </DockPanel>
+
+        <TextBlock x:Name="ErrorText" Foreground="#B91C1C" Margin="0,10,0,0" TextWrapping="Wrap" Visibility="Collapsed"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,18,0,0">
+            <Button Style="{StaticResource Tool}" Content="Cancel" IsCancel="True"/>
+            <Button Style="{StaticResource Primary}" Content="Save" IsDefault="True" Click="Save_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

@@ -1,0 +1,30 @@
+name: FastGet Release
+
+on:
+  push:
+    tags: ['fastget-v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    env:
+      TAG: ${{ github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Install Inno Setup
+        run: choco install innosetup --no-progress -y
+      - name: Build
+        shell: pwsh
+        run: ./FastGet/installer/build.ps1 -Version $env:TAG.Substring('fastget-v'.Length)
+      - name: Publish release
+        shell: pwsh
+        run: |
+          $version = $env:TAG.Substring('fastget-v'.Length)
+          gh release create $env:TAG (Get-ChildItem FastGet/installer/output/*).FullName --title "FastGet $version" --generate-notes
