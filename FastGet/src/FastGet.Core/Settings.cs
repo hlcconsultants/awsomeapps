@@ -28,11 +28,14 @@ public sealed class AppSettings
 
     static readonly JsonSerializerOptions Json = new() { WriteIndented = true, Converters = { new JsonStringEnumConverter() } };
 
+    /// <summary>Set for test runs that must not touch the user's real settings, download list, or browser registration.</summary>
+    public static string? IsolatedDataDir => Environment.GetEnvironmentVariable("FASTGET_DATA_DIR");
+
     public static string DataDir
     {
         get
         {
-            var d = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FastGet");
+            var d = IsolatedDataDir ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FastGet");
             Directory.CreateDirectory(d);
             return d;
         }

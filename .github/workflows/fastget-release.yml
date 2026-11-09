@@ -27,4 +27,4 @@ jobs:
         shell: pwsh
         run: |
           $version = $env:TAG.Substring('fastget-v'.Length)
-          gh release create $env:TAG (Get-ChildItem FastGet/installer/output/*).FullName --title "FastGet $version" --generate-notes
+          gh release create $env:TAG (Get-ChildItem FastGet/installer/output/* -Exclude '*-Store-*').FullName --title "FastGet $version" --generate-notes

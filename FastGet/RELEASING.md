@@ -13,7 +13,7 @@ Push a version tag such as `fastget-v1.0.0`. The `fastget-` prefix keeps its rel
 ## 3. Publish the extension
 
 1. Register at the [Chrome Web Store developer dashboard](https://chrome.google.com/webstore/devconsole). Registration has a one-time fee, reported as $5.
-2. Upload `FastGet-Extension-<version>.zip` from the release. It has the manifest `key` removed because the store rejects it on a first upload.
+2. Build locally and upload `installer/output/FastGet-Extension-Store-<version>.zip`. It has the manifest `key` removed because the store rejects it on a first upload. Don't use the zip attached to the release, which keeps its `key` for manual installs.
 3. Paste the text from `store/LISTING.md`, and link to `PRIVACY.md` as the privacy policy.
 4. Copy the extension ID the store assigns, and add it to `ExtensionIds` in `src/FastGet.App/NativeHostRegistrar.cs`. Release a new build, or the store version can't reach the app.
 

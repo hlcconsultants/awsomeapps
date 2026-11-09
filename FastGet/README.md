@@ -16,7 +16,7 @@ FastGet refuses DRM-protected and live streams. It doesn't capture YouTube. You 
 
 Download `FastGet-Setup-<version>.exe` from a `fastget-v` release on the [Releases page](https://github.com/hlcconsultants/awsomeapps/releases) and run it. No admin rights are needed.
 
-To connect Chrome, install the FastGet extension. For a local build, open `chrome://extensions`, turn on Developer mode, choose **Load unpacked**, and select the `extension` folder.
+To connect Chrome until the extension is on the Chrome Web Store, open `chrome://extensions`, turn on Developer mode, choose **Load unpacked**, and select the folder opened by the **Connect Chrome** Start menu shortcut. You can also extract `FastGet-Extension-<version>.zip` from the release and select that folder.
 
 ## Video output
 

@@ -32,7 +32,8 @@ public partial class App : Application
             return;
         }
 
-        _mutex = new Mutex(true, @"Local\FastGet.SingleInstance", out bool first);
+        var mutexName = @"Local\FastGet.SingleInstance" + (AppSettings.IsolatedDataDir != null ? ".Isolated" : "");
+        _mutex = new Mutex(true, mutexName, out bool first);
         if (!first)
         {
             try { Task.Run(() => IpcClient.SendAsync(new IpcMessage { Cmd = "show" }, TimeSpan.FromSeconds(2))).Wait(3000); }
@@ -49,8 +50,11 @@ public partial class App : Application
         Manager.ItemFailed += it => Notify("Download failed", $"{it.Display}: {it.Error}");
         Manager.QueueFinished += a => Dispatcher.BeginInvoke(() => OnQueueFinished(a));
 
-        try { NativeHostRegistrar.Register(); }
-        catch (Exception ex) { Debug.WriteLine(ex); } // the app still works without browser integration
+        if (AppSettings.IsolatedDataDir == null)
+        {
+            try { NativeHostRegistrar.Register(); }
+            catch (Exception ex) { Debug.WriteLine(ex); } // the app still works without browser integration
+        }
 
         _main = new MainWindow(Manager);
         BuildTray();

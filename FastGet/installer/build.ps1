@@ -35,18 +35,22 @@ New-Item -ItemType Directory -Force $output | Out-Null
 
 Invoke-Step { & $iscc /Q "/DAppVersion=$Version" "$PSScriptRoot\FastGet.iss" }
 
-# The Chrome Web Store rejects a manifest "key" on a first upload.
-$storeDir = Join-Path ([IO.Path]::GetTempPath()) "fastget-store-$([guid]::NewGuid().ToString('N'))"
-Copy-Item "$root\extension" $storeDir -Recurse
+# The package attached to releases keeps its "key", so its ID matches the app when loaded unpacked.
+# The Chrome Web Store package drops it because the store rejects a "key" on a first upload.
+$packageDir = Join-Path ([IO.Path]::GetTempPath()) "fastget-extension-$([guid]::NewGuid().ToString('N'))"
+Copy-Item "$root\extension" $packageDir -Recurse
 try {
-    $manifest = Get-Content "$storeDir\manifest.json" -Raw | ConvertFrom-Json
-    $manifest.PSObject.Properties.Remove("key")
+    $manifest = Get-Content "$packageDir\manifest.json" -Raw | ConvertFrom-Json
     $manifest.version = $Version
-    $manifest | ConvertTo-Json -Depth 10 | Set-Content "$storeDir\manifest.json"
-    Compress-Archive -Path "$storeDir\*" -DestinationPath "$output\FastGet-Extension-$Version.zip"
+    $manifest | ConvertTo-Json -Depth 10 | Set-Content "$packageDir\manifest.json"
+    Compress-Archive -Path "$packageDir\*" -DestinationPath "$output\FastGet-Extension-$Version.zip"
+
+    $manifest.PSObject.Properties.Remove("key")
+    $manifest | ConvertTo-Json -Depth 10 | Set-Content "$packageDir\manifest.json"
+    Compress-Archive -Path "$packageDir\*" -DestinationPath "$output\FastGet-Extension-Store-$Version.zip"
 }
 finally {
-    Remove-Item $storeDir -Recurse -Force -Confirm:$false
+    Remove-Item $packageDir -Recurse -Force -Confirm:$false
 }
 
 Get-ChildItem $output | Select-Object FullName, @{ n = "MB"; e = { [math]::Round($_.Length / 1MB, 1) } }

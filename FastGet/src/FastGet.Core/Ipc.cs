@@ -31,7 +31,7 @@ public static class IpcJson
 
 public sealed class IpcServer(Func<IpcMessage, Task<IpcReply>> handler) : IDisposable
 {
-    public static string PipeName => "FastGet.Ipc." + Environment.UserName;
+    public static string PipeName => "FastGet.Ipc." + Environment.UserName + (AppSettings.IsolatedDataDir != null ? ".Isolated" : "");
 
     readonly CancellationTokenSource _cts = new();
 

@@ -31,7 +31,7 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="135"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -93,9 +93,9 @@
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Width="*" MinWidth="200" Binding="{Binding Display, Mode=OneWay}"/>
-                    <DataGridTextColumn Header="Size" Width="90" Binding="{Binding SizeText, Mode=OneWay}"/>
-                    <DataGridTemplateColumn Header="Progress" Width="150" SortMemberPath="Percent">
+                    <DataGridTextColumn Header="Name" Width="*" MinWidth="160" Binding="{Binding Display, Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Size" Width="78" Binding="{Binding SizeText, Mode=OneWay}"/>
+                    <DataGridTemplateColumn Header="Progress" Width="115" SortMemberPath="Percent">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -107,10 +107,9 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Speed" Width="95" Binding="{Binding SpeedText, Mode=OneWay}"/>
-                    <DataGridTextColumn Header="Time left" Width="80" Binding="{Binding EtaText, Mode=OneWay}"/>
-                    <DataGridTextColumn Header="Status" Width="170" Binding="{Binding StatusText, Mode=OneWay}"/>
-                    <DataGridTextColumn Header="Added" Width="125" Binding="{Binding AddedAt, Mode=OneWay, StringFormat={}{0:g}}"/>
+                    <DataGridTextColumn Header="Speed" Width="92" Binding="{Binding SpeedText, Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Time left" Width="76" Binding="{Binding EtaText, Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Status" Width="125" Binding="{Binding StatusText, Mode=OneWay}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

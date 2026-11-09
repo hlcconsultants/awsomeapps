@@ -81,7 +81,7 @@ public sealed class DownloadItem : INotifyPropertyChanged
     [JsonIgnore] public int Connections { get => _connections; set => _connections = value; }
     [JsonIgnore] public bool IsActive => Status is DownloadStatus.Downloading or DownloadStatus.Merging;
     [JsonIgnore] public bool IsCompleted => Status == DownloadStatus.Completed;
-    [JsonIgnore] public string Display => string.IsNullOrEmpty(FileName) ? Url : FileName;
+    [JsonIgnore] public string Display => !string.IsNullOrEmpty(FileName) ? FileName : Uri.TryCreate(Url, UriKind.Absolute, out var uri) ? FileNames.FromUrl(uri) : Url;
     [JsonIgnore] public double Percent => TotalSize > 0 ? Math.Min(100, Downloaded * 100.0 / TotalSize) : (IsCompleted ? 100 : 0);
     [JsonIgnore] public string SizeText => TotalSize > 0 ? (SizeEstimated ? "~" : "") + Format.Bytes(TotalSize) : "Unknown";
     [JsonIgnore] public string DoneText => Format.Bytes(Downloaded);
