@@ -54,6 +54,17 @@ The installer and Chrome Web Store package are written to `installer/output`.
 - [Privacy](PRIVACY.md)
 - [Publishing a release](RELEASING.md)
 
+## Code signing policy
+
+Releases are built from this repository by GitHub Actions. FastGet is applying to SignPath Foundation for free code signing, and current releases are unsigned. If approved, signed releases will carry this statement: Free code signing provided by SignPath.io, certificate by SignPath Foundation.
+
+Team roles:
+
+- Committers and reviewers: [hlcconsultants](https://github.com/hlcconsultants)
+- Approvers: [hlcconsultants](https://github.com/hlcconsultants)
+
+Privacy: see the [privacy policy](PRIVACY.md). FastGet only contacts the websites you download from. The optional ffmpeg install uses winget, which has its own terms.
+
 ## License
 
 Copyright (C) 2026 FastGet contributors. Licensed under the [GNU General Public License v3.0 or later](LICENSE). The bundled .NET runtime has its own notices, installed alongside the app.
